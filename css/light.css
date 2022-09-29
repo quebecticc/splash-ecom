@@ -764,7 +764,6 @@ footer .copyright {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    white-space: nowrap;
 }
 
 #cart table img {
@@ -1248,4 +1247,22 @@ input:checked+.slider:before {
     footer .copyright {
         text-align: start;
     }
+}
+
+.notify {
+    background: rgba(0, 255, 0, .4);
+    border-radius: 3px;
+    border: 2px solid green;
+    color: #000;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0.8rem 1.4rem;
+    position: fixed;
+    top: 0;
+    right: 20px;
+    transition: all 0.5s ease-in-out;
+}
+.notify.-hidden {
+    opacity: 0;
+    transform: scaleY(0);
 }

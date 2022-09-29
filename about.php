@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnsjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" href="assets/libraries/font-awesome_6.1.2/css/all.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link id="stylesheet" rel="stylesheet" href="css/light.css" />
@@ -21,8 +21,7 @@
                 <li><a href="shop.php">Shop</a></li>
                 <li><a class="active" href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <li><a href="" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li id="login"></li>
+                <li><a href="cart.php" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
                 <a href="cart.php" id="close"><i class="fa-solid fa-mark"></i></a>
                 <label class="switch">
                     <input type="checkbox" id="theme" onclick="changeTheme()">
@@ -32,7 +31,6 @@
         </div>
         <div id="mobile">
             <a href=""><i class="fa-solid fa-bag-shopping"></i></a>
-            <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
 

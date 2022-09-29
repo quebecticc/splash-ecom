@@ -22,7 +22,6 @@
                 <li><a href="about.php">About</a></li>
                 <li><a class="active" href="contact.php">Contact</a></li>
                 <li><a href="cart.php" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li id="login"></li>
                 <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
                 <label class="switch">
                     <input type="checkbox" id="theme" onclick="changeTheme()">
@@ -49,16 +48,15 @@
             <div>
                 <li>
                     <i class="fa-solid fa-map"></i>
-                    <p>Address: A-704, Norita Building, Pride Park Complex, <br>
-                        Besides R-Mall Thane, Thane (West) - 400607</p>
+                    <p>1072 Rose Street, Monee, Illinois</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-at"></i>
-                    <p>annuraggggg@gmail.com</p>
+                    <p>anurag.sawant@quebecticc.tk</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-phone"></i>
-                    <p>9324083638</p>
+                    <p>+1234567890</p>
                 </li>
                 <li>
                     <i class="fa-solid fa-clock"></i>
@@ -67,8 +65,7 @@
             </div>
         </div>
         <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60275.68860125724!2d72.90814885820312!3d19.228782000000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b95905ab2013%3A0x93e203f4199ea86e!2sPride%20Park%20Complex!5e0!3m2!1sen!2sin!4v1661528106376!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145803.4219812076!2d-93.87698555034424!3d39.64805689699658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880b2d386f6e2619%3A0x7f15825064115956!2sIllinois%2C%20USA!5e0!3m2!1sen!2sin!4v1664473020375!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        </div>
 
     </section>
 

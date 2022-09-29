@@ -1,9 +1,18 @@
+<?php
+
+require 'conn.php';
+
+$cartCookie = $_COOKIE['cart'];
+$cart = json_decode($cartCookie, true);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/libraries/font-awesome_6.1.2/css/all.css" />
+    <link rel="stylesheet" href="assets/libraries/font-awesome_6.1.2/css/all.css"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link id="stylesheet" rel="stylesheet" href="css/light.css"/>
@@ -21,7 +30,6 @@
             <li><a href="about.php">About</a></li>
             <li><a href="contact.php">Contact</a></li>
             <li><a class="active" href="" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
-            <li id="login"></li>
             <a href="cart.php" id="close"><i class="fa-solid fa-xmark"></i></a>
             <label class="switch">
                 <input type="checkbox" id="theme" onclick="changeTheme()">
@@ -36,11 +44,11 @@
 </section>
 <section id="page-header" class="about-header">
     <h2>#cart</h2>
-    <p>LEave a Message. We would love to hear from you!</p>
+    <p>Leave a Message. We would love to hear from you!</p>
 </section>
 
 <section id="cart" class="section-p1">
-    <table width=100%>
+    <table width=100% style="table-layout:fixed; word-break: break-all  ">
         <thead>
         <tr>
             <td>Remove</td>
@@ -50,32 +58,28 @@
             <td>Quantity</td>
             <td>Subtotal</td>
         </tr>
+
         </thead>
         <tbody>
-        <tr>
-            <td><a href=""><i class="fa-solid fa-xmark"></i></a></td>
-            <td><img src="assets/img/products/f1.jpg" alt=""></td>
-            <td>Cartoon Astronaut T-Shirts</td>
-            <td>$118.19</td>
-            <td><input type="number" value="1"></td>
-            <td>$118.19</td>
-        </tr>
-        <tr>
-            <td><a href=""><i class="fa-solid fa-xmark"></i></a></td>
-            <td><img src="assets/img/products/f2.jpg" alt=""></td>
-            <td>Cartoon Astronaut T-Shirts</td>
-            <td>$118.19</td>
-            <td><input type="number" value="1"></td>
-            <td>$118.19</td>
-        </tr>
-        <tr>
-            <td><a href=""><i class="fa-solid fa-xmark"></i></a></td>
-            <td><img src="assets/img/products/f3.jpg" alt=""></td>
-            <td>Cartoon Astronaut T-Shirts</td>
-            <td>$118.19</td>
-            <td><input type="number" value="1"></td>
-            <td>$118.19</td>
-        </tr>
+        <?php
+
+        foreach ($cart as $key => $value) {
+            $query = "SELECT * FROM splash_products WHERE product_id =" . $value['productID'] . ";";
+            if ($result = $db->query($query)) {
+                while ($product = $result->fetch_assoc()) {
+                    echo '<tr data-product-row="' . $product['product_id'] . '">';
+                    echo '<td><a href="#_"><i class="fa-solid fa-xmark" onclick="removeItem(this)" data-product-id="' . $product['product_id'] . '"></i></a></td>';
+                    echo '<td><img src="products/' . $product['product_id'] . '/1.jpg" alt=""></td>';
+                    echo '<td>' . $product['product_name'] . '</td>';
+                    echo '<td>₹' . $product['product_price'] . '</td>';
+                    echo '<td><input type="number" value="' . $value['productQuantity'] . '" data-product-update="' . $product['product_id'] . '" disabled></td>';
+                    echo '<td>' . $product['product_price'] * $value['productQuantity'] . '</td>';
+                    echo '</tr>';
+                }
+            }
+        }
+
+        ?>
         </tbody>
     </table>
 </section>
@@ -84,8 +88,9 @@
     <div id="coupon">
         <h3>Apply Coupon</h3>
         <div>
-            <input type="text" placeholder="Enter Your Coupon Code">
-            <button class="normal">Apply</button>
+            <input type="text" placeholder="Enter Your Coupon Code" id="couponCode">
+            <button class="normal" onclick="discount()">Apply</button>
+            <p id="coupon_message"></p>
         </div>
     </div>
 
@@ -94,7 +99,7 @@
         <table>
             <tr>
                 <td>Cart Subtotal</td>
-                <td>$335</td>
+                <td id="total"></td>
             </tr>
             <tr>
                 <td>Shipping</td>
@@ -102,10 +107,11 @@
             </tr>
             <tr>
                 <td><strong>Total</strong></td>
-                <td><strong>$335</strong></td>
+                <td><strong id="grand_total">$335</strong></td>
             </tr>
         </table>
-        <button class="normal">Proceed to checkout</button>
+        <button class="normal" onclick="checkout()">Proceed to checkout</button>
+        <p id="checkoutError" style="color: red"></p>
     </div>
 </section>
 
@@ -163,6 +169,9 @@
 </footer>
 
 </body>
+<script src="assets/libraries/jquery-3.6.0.js" ></script>
 <script src="js/index.js"></script>
+<script src="js/checkout.js"></script>
 
-</html>
+
+</html>>

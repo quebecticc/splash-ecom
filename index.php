@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="assets/libraries/font-awesome_6.1.2/css/all.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
 </head>
 
 <body>
+
     <section id="header">
         <a href="index.php"><img src="assets/img/logo.png" class="logo" alt="" id="logo"></a>
 
@@ -22,8 +24,7 @@
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="cart.php" id="lg-bag"><i class="fa-solid fa-bag-shopping"></i></a></li>
 
-                <li id="login"></li>
-                <li><a href="#" id="close"><i class="fa-solid fa-xmark"></i></a></li>
+                <li><a href=" " id="close"><i class="fa-solid fa-xmark"></i></a></li>
                 <label class="switch">
                     <input type="checkbox" id="theme" onclick="changeTheme()">
                     <span class="slider"></span>
@@ -78,24 +79,30 @@
             <?php
 
             require 'conn.php';
-            $query = "SELECT * FROM products, products_images WHERE products.product_id = products_images.product_id LIMIT 7";
+            $query = "SELECT * FROM splash_products LIMIT 8";
+            /**
+             * @param array $product
+             * @return void
+             */
+            function selectProduct(array $product)
+            {
+                echo '<div class="pro" data-product-id="' . $product['product_id'] . '" onclick="viewProduct(this)" id="productContainer">';
+                echo '<img src="products/' . $product['product_id'] . '/1.jpg"/>';
+                echo '<div class="des">';
+                echo '<span>' . $product['product_brand'] . '</span>';
+                echo '<h5>' . $product['product_name'] . '</h5>';
+                echo '<div class="star">';
+
+                echo '</div>';
+                echo '<h4>₹ ' . $product['product_price'] . '</h4>';
+                echo '</div>';
+            }
+
             if ($result = $db->query($query)) {
                 while ($product = $result->fetch_assoc()) {
-                    echo '<div class="pro">';
-
-                    echo '<img src="data:image/jpeg;base64,' . base64_encode($product['image_1']) . '"/>';
-                    echo '<div class="des">';
-                    echo '<span>' . $product['brand'] . '</span>';
-                    echo '<h5>' . $product['name'] . '</h5>';
-                    echo '<div class="star">';
-
-                    for ($rating = 1; $rating <= floor($product['rating']); $rating++) {
-                        echo '<i class="fas fa-star"></i>';
-                    }
-                    echo '</div>';
-                    echo '<h4>₹ ' . $product['price'] . '</h4>';
-                    echo '</div>';
-                    echo '<a href="#"><i class="fa fa-shopping-cart cart"></i></a>';
+                    selectProduct($product);
+                    echo '<input id="productQuantity" value="1" hidden />';
+                    echo '<a class="click-handler" onclick="addToCart(this)" data-product-id="' . $product['product_id'] . '"><i class="fa fa-shopping-cart cart"></i></a>';
                     echo '</div>';
                 }
             }
@@ -106,148 +113,24 @@
     <section id="banner" class="section-m1">
         <h4>Repair Services</h4>
         <h2>Upto <span>70% Off</span> - All T-Shirts and Accessories</h2>
-        <button class="normal">Explore More</button>
+        <button class="normal" onclick="goToShop()">Explore More</button>
     </section>
 
     <section id="product1" class="section-p1">
         <h2>New Arrivals</h2>
         <p>Summer Collection Modern Designs</p>
         <div class="pro-container">
-            <div class="pro">
-                <img src="assets/img/products/n1.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
+            <?php
 
-            <div class="pro">
-                <img src="assets/img/products/n2.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n3.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n4.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n5.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n6.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n7.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="assets/img/products/n8.jpg" alt="">
-                <div class="des">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$78</h4>
-                </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
-            </div>
+                        require 'conn.php';
+                        $query = "SELECT * FROM splash_products ORDER BY product_id DESC LIMIT 8";
+                        if ($result = $db->query($query)) {
+                            while ($product = $result->fetch_assoc()) {
+                                selectProduct($product);
+                                echo '<a href="#"><i class="fa fa-shopping-cart cart"></i></a>';
+                                echo '</div>';
+                            }
+                        } ?>
         </div>
     </section>
 
@@ -286,7 +169,7 @@
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
             <h4>Sign Up for Newsletter</h4>
-            <p>Get E-mail updates abput out latest shop and <span>special offers</span></p>
+            <p>Get E-mail updates about out the latest shop and <span>special offers</span></p>
         </div>
         <div class="form">
             <input type="text" name="" id="" placeholder="Your Email Address">
@@ -345,8 +228,12 @@
             <p>2022, Quebecia Inc. Template Developed and Designed by Anurag</p>
         </div>
     </footer>
+    <div class='notify -hidden'>
+        Item added to cart.
+    </div>
 </body>
 <script src="assets/libraries/jquery-3.6.0.js" ></script>
 <script src="js/index.js"></script>
+
 
 </html>
